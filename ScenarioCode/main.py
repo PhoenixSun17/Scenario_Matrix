@@ -126,7 +126,7 @@ def Go ():
                     filename = GetArg()
                     setFileStream(filename)
                     # need to not exit program at this point
-                    Go()
+                    alternateGo()
                     setUserStream()
                 if key_Io == "Export":
                     store.pop()
