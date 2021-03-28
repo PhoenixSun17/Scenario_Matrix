@@ -147,6 +147,65 @@ def Go ():
             print("Invalid, please retry")
 
 
+def alternateGo():
+    print()
+    while True:
+        printMenu_main2()
+        key = Menu_main()
+        if key == "Op":
+            while True:
+                printMenu_op()
+                key_op = Menu_operation()
+                if key_op == "Break":
+                    break
+                elif key_op == "Add":
+                    Mat1 = GetUserMat()
+                    Mat2 = GetUserMat()
+                    Mat1.get_sum(Mat2).show()
+                elif key_op == "Minus":
+                    Mat1 = GetUserMat()
+                    Mat2 = GetUserMat()
+                    Mat1.get_sub(Mat2).show()
+                elif key_op == "Multiply":
+                    Mat1 = GetUserMat()
+                    Mat2 = GetUserMat()
+                    Mat1.get_product(Mat2).show()
+                elif key_op == "Mult Scalar":
+                    Mat1 = GetUserMat()
+                    Mat2 = GetArg()
+                    try:
+                        Mat2 = int(Mat2)
+                    except ValueError:
+                        print("The input is Invalid")
+                    else:
+                        Mat1.mult_scalar(Mat2).show()
+                elif key_op == "Invalid, please retry":
+                    print(Menu_operation())
+        elif key == "Det":
+            while True:
+                printMenu_Det()
+                key_det = Menu_Det()
+                if key_det == "Break":
+                    break
+                elif key_det == "2x2":
+                    print("Please Enter one Matrix to calculate Determinant")
+                    Mat = GetUserMat()
+                    try:
+                        i = Mat.det()
+                        print("The Determinant of the Matrix is: ", i)
+                    except ValueError:
+                        print("The Matrix you input is invalid, please retry")
+                elif key_det == "Invalid, please retry":
+                    print(Menu_Det())
+        elif key == "Eig":
+            while True:
+                printMenu_Eig()
+                if Menu_eigenvalue() == "Break":
+                    break
+                elif Menu_eigenvalue() == "Invalid, please retry":
+                    print(Menu_eigenvalue())
+        elif key == "exit":
+            return
 
 def printMenu_main():
     print("Welcome to Matrix Practice system Ver 1.0.0")
@@ -154,6 +213,16 @@ def printMenu_main():
     print("2: Determinant Operation Practice")
     print("3: Eigenvalue/Eigenvector Operation Practice")
     print("4: File IO Function Menu")
+    print("5: Quit the System")
+    print("Enter number to start corresponding practice")
+    print("Invalid number will loop back to main menu")
+    return
+
+def printMenu_main2():
+    print("Welcome to Matrix Practice system Ver 1.0.0")
+    print("1: Basic Matrix Operation Practice")
+    print("2: Determinant Operation Practice")
+    print("3: Eigenvalue/Eigenvector Operation Practice")
     print("5: Quit the System")
     print("Enter number to start corresponding practice")
     print("Invalid number will loop back to main menu")
@@ -213,7 +282,7 @@ def GetUserMat():
         print("Invalid input, please retry")
         return None
     store.append(value)
-    matrix = input_dis(deci)
+    matrix = input_dis(value)
     store.append(matrix)
     return matrix
 
