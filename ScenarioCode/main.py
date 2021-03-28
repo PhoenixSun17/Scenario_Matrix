@@ -102,7 +102,7 @@ def Go ():
                     Mat = GetUserMat()
                     try:
                         i = Mat.det()
-                        print("The Determinant of the Matrix is: ",i)
+                        print("The Determinant of the Matrix is: ", i)
                     except ValueError:
                         print("The Matrix you input is invalid, please retry")
                 elif key_det == "Invalid, please retry":
@@ -130,7 +130,7 @@ def Go ():
                     setUserStream()
                 if key_Io == "Export":
                     store.pop()
-                    store.append("3")
+                    store.pop()
                     store.append("5")
                     # get filename
                     # write to that file
