@@ -1,5 +1,5 @@
-from cl import *
 from display import *
+# noinspection PyUnresolvedReferences
 from matrix_class import *
 import sys
 
@@ -8,7 +8,9 @@ normal_stdin = sys.stdin
 file = None
 global store
 store = []
-def Menu_main ():
+
+
+def Menu_main():
     argument = GetArg()
     switcher = {
         "1": "Op",
@@ -19,7 +21,8 @@ def Menu_main ():
     }
     return switcher.get(argument, "Invalid, please retry")
 
-def Menu_operation ():
+
+def Menu_operation():
     argument = GetArg()
     switcher = {
         "1": "Add",
@@ -29,6 +32,7 @@ def Menu_operation ():
         "5": "Break"
     }
     return switcher.get(argument, "Invalid, please retry")
+
 
 def Menu_Det():
     argument = GetArg()
@@ -48,6 +52,7 @@ def Menu_eigenvalue():
     }
     return switcher.get(argument, "Invalid, please retry")
 
+
 def Menu_IO():
     argument = GetArg();
     switcher = {
@@ -57,7 +62,8 @@ def Menu_IO():
     }
     return switcher.get(argument, "Invalid, please retry")
 
-def Go ():
+
+def Go():
     print()
     while True:
         printMenu_main()
@@ -69,19 +75,35 @@ def Go ():
                 if key_op == "Break":
                     break
                 elif key_op == "Add":
-                    Mat1 = GetUserMat()
-                    Mat2 = GetUserMat()
-                    Mat1.get_sum(Mat2).show()
+                    addc = int(input("Please enter the number of columns:"))
+                    store.append(addc)
+                    Mat1 = GetUserMat(addc)
+                    Mat2 = GetUserMat(addc)
+                    Mat_Ans = Mat1.get_sum(Mat2)
+                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
+                    Mat_Ans.show()
                 elif key_op == "Minus":
-                    Mat1 = GetUserMat()
-                    Mat2 = GetUserMat()
-                    Mat1.get_sub(Mat2).show()
+                    minc = int(input("Please enter the number of columns:"))
+                    store.append(minc)
+                    Mat1 = GetUserMat(minc)
+                    Mat2 = GetUserMat(minc)
+                    Mat_Ans = Mat1.get_sub(Mat2)
+                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
+                    Mat_Ans.show()
                 elif key_op == "Multiply":
-                    Mat1 = GetUserMat()
-                    Mat2 = GetUserMat()
-                    Mat1.get_product(Mat2).show()
+                    mulc1 = int(input("Please enter the number of columns of first matrix:"))
+                    store.append(mulc1)
+                    Mat1 = GetUserMat(mulc1)
+                    mulc2 = int(input("Please enter the number of columns of second matrix:"))
+                    store.append(mulc2)
+                    Mat2 = GetUserMat(mulc2)
+                    Mat_Ans = Mat1.get_product(Mat2)
+                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
+                    Mat_Ans.show()
                 elif key_op == "Mult Scalar":
-                    Mat1 = GetUserMat()
+                    scc = int(input("Please enter the number of columns:"))
+                    store.append(scc)
+                    Mat1 = GetUserMat(scc)
                     Mat2 = GetArg()
                     try:
                         Mat2 = int(Mat2)
@@ -99,7 +121,7 @@ def Go ():
                     break
                 elif key_det == "2x2":
                     print("Please Enter one Matrix to calculate Determinant")
-                    Mat = GetUserMat()
+                    Mat = GetUserMat(2)
                     try:
                         i = Mat.det()
                     except ValueError:
@@ -160,25 +182,35 @@ def alternateGo():
                 if key_op == "Break":
                     break
                 elif key_op == "Add":
-                    Mat1 = GetUserMat()
-                    Mat2 = GetUserMat()
+                    addc = int(input("Please enter the number of columns:"))
+                    store.append(addc)
+                    Mat1 = GetUserMat(addc)
+                    Mat2 = GetUserMat(addc)
                     Mat_Ans = Mat1.get_sum(Mat2)
-                    getAns(Mat_Ans.get_row_num, Mat_Ans.get_col_num)
+                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
                     Mat_Ans.show()
                 elif key_op == "Minus":
-                    Mat1 = GetUserMat()
-                    Mat2 = GetUserMat()
+                    minc = int(input("Please enter the number of columns:"))
+                    store.append(minc)
+                    Mat1 = GetUserMat(minc)
+                    Mat2 = GetUserMat(minc)
                     Mat_Ans = Mat1.get_sub(Mat2)
-                    getAns(Mat_Ans.get_row_num, Mat_Ans.get_col_num)
+                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
                     Mat_Ans.show()
                 elif key_op == "Multiply":
-                    Mat1 = GetUserMat()
-                    Mat2 = GetUserMat()
+                    mulc1 = int(input("Please enter the number of columns of first matrix:"))
+                    store.append(mulc1)
+                    Mat1 = GetUserMat(mulc1)
+                    mulc2 = int(input("Please enter the number of columns of second matrix:"))
+                    store.append(mulc2)
+                    Mat2 = GetUserMat(mulc2)
                     Mat_Ans = Mat1.get_product(Mat2)
-                    getAns(Mat_Ans.get_row_num, Mat_Ans.get_col_num)
+                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
                     Mat_Ans.show()
                 elif key_op == "Mult Scalar":
-                    Mat1 = GetUserMat()
+                    scc = int(input("Please enter the number of columns:"))
+                    store.append(scc)
+                    Mat1 = GetUserMat(scc)
                     Mat2 = GetArg()
                     try:
                         Mat2 = int(Mat2)
@@ -186,7 +218,7 @@ def alternateGo():
                         print("The input is Invalid")
                     else:
                         Mat_Ans = Mat1.mult_scalar(Mat2)
-                        getAns(Mat_Ans.get_row_num, Mat_Ans.get_col_num)
+                        getAns(Mat_Ans.row_num, Mat_Ans.col_num)
                         Mat_Ans.show()
                 elif key_op == "Invalid, please retry":
                     print(Menu_operation())
@@ -198,7 +230,7 @@ def alternateGo():
                     break
                 elif key_det == "2x2":
                     print("Please Enter one Matrix to calculate Determinant")
-                    Mat = GetUserMat()
+                    Mat = GetUserMat(2)
                     try:
                         i = Mat.det()
                     except ValueError:
@@ -218,6 +250,7 @@ def alternateGo():
         elif key == "exit":
             return
 
+
 def printMenu_main():
     print("Welcome to Matrix Practice system Ver 1.0.0")
     print("1: Basic Matrix Operation Practice")
@@ -229,6 +262,7 @@ def printMenu_main():
     print("Invalid number will loop back to main menu")
     return
 
+
 def printMenu_main2():
     print("Welcome to Matrix Practice system Ver 1.0.0")
     print("1: Basic Matrix Operation Practice")
@@ -238,6 +272,7 @@ def printMenu_main2():
     print("Enter number to start corresponding practice")
     print("Invalid number will loop back to main menu")
     return
+
 
 def printMenu_op():
     print("This is the sub menu of operation practice")
@@ -250,6 +285,7 @@ def printMenu_op():
     print("Invalid number will loop back to this menu")
     return
 
+
 def printMenu_Det():
     print("This is the sub menu of determinant practice")
     print("1: Do Determinant Operation")
@@ -257,6 +293,7 @@ def printMenu_Det():
     print("Enter number to start corresponding practice")
     print("Invalid number will loop back to this menu")
     return
+
 
 def printMenu_Eig():
     print("This is the sub menu of Eigenvalue/vector practice")
@@ -267,6 +304,7 @@ def printMenu_Eig():
     print("Invalid number will loop back to this menu")
     return
 
+
 def printMenu_IO():
     print("This is the sub menu of imported practice")
     print("1: Import exercise")
@@ -276,32 +314,29 @@ def printMenu_IO():
     print("Invalid number will loop back to this menu")
     return
 
+
 def GetArg():
     print()
     value = input("Please enter a number:")
 
     store.append(value)
     return value
-    
-def GetUserMat():
+
+
+def GetUserMat(n):
     print()
-    print("Please Enter a number to assign number of rows in the Matrix")
-    value = GetArg()
-    try:
-        value = int(value)
-    except ValueError:
-        print("Invalid input, please retry")
-        return None
-    store.append(value)
-    matrix = input_dis(value)
+    matrix = input_dis(n)
     store.append(matrix)
     return matrix
+
 
 def setFileStream():
     sys.stdin = file
 
+
 def setUserStream():
     sys.stdin = normal_stdin
+
 
 def getAns(row, col):
     setUserStream()
@@ -309,8 +344,9 @@ def getAns(row, col):
         ans = input("Ans is : ")
     else:
         print("Answer is ", row, "x", col, " matrix: ")
-        ans = input_dis(row, col)
+        ans = input_dis(int(col))
         setFileStream()
     return ans
+
 
 Go()
