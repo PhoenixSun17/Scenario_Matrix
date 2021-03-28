@@ -122,6 +122,25 @@ def Go ():
                 key_Io = Menu_IO()
                 if key_Io == "Break":
                     break
+                if key_Io == "Import":
+                    filename = GetArg()
+                    setFileStream(filename)
+                    # need to not exit program at this point
+                    Go()
+                    setUserStream()
+                if key_Io == "Export":
+                    store.pop()
+                    store.append("3")
+                    store.append("5")
+                    # get filename
+                    # write to that file
+                    filename = GetArg()
+                    file = open(filename, "w")
+                    for line in store:
+                        # might need to add \n
+                        file.write(line)
+                    file.close()
+                    print("Your file has been saved!")
                 elif key_Io == "Invalid, please retry":
                     printMenu_IO()
         else:
