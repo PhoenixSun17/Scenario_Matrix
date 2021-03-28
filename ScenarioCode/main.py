@@ -102,9 +102,10 @@ def Go ():
                     Mat = GetUserMat()
                     try:
                         i = Mat.det()
-                        print("The Determinant of the Matrix is: ", i)
                     except ValueError:
                         print("The Matrix you input is invalid, please retry")
+                    else:
+                        print("The Determinant of the Matrix is: ", i)
                 elif key_det == "Invalid, please retry":
                     print(Menu_Det())
         elif key == "Eig":
@@ -161,15 +162,21 @@ def alternateGo():
                 elif key_op == "Add":
                     Mat1 = GetUserMat()
                     Mat2 = GetUserMat()
-                    Mat1.get_sum(Mat2).show()
+                    Mat_Ans = Mat1.get_sum(Mat2)
+                    getAns(Mat_Ans.get_row_num, Mat_Ans.get_col_num)
+                    Mat_Ans.show()
                 elif key_op == "Minus":
                     Mat1 = GetUserMat()
                     Mat2 = GetUserMat()
-                    Mat1.get_sub(Mat2).show()
+                    Mat_Ans = Mat1.get_sub(Mat2)
+                    getAns(Mat_Ans.get_row_num, Mat_Ans.get_col_num)
+                    Mat_Ans.show()
                 elif key_op == "Multiply":
                     Mat1 = GetUserMat()
                     Mat2 = GetUserMat()
-                    Mat1.get_product(Mat2).show()
+                    Mat_Ans = Mat1.get_product(Mat2)
+                    getAns(Mat_Ans.get_row_num, Mat_Ans.get_col_num)
+                    Mat_Ans.show()
                 elif key_op == "Mult Scalar":
                     Mat1 = GetUserMat()
                     Mat2 = GetArg()
@@ -178,7 +185,9 @@ def alternateGo():
                     except ValueError:
                         print("The input is Invalid")
                     else:
-                        Mat1.mult_scalar(Mat2).show()
+                        Mat_Ans = Mat1.mult_scalar(Mat2)
+                        getAns(Mat_Ans.get_row_num, Mat_Ans.get_col_num)
+                        Mat_Ans.show()
                 elif key_op == "Invalid, please retry":
                     print(Menu_operation())
         elif key == "Det":
@@ -192,9 +201,11 @@ def alternateGo():
                     Mat = GetUserMat()
                     try:
                         i = Mat.det()
-                        print("The Determinant of the Matrix is: ", i)
                     except ValueError:
                         print("The Matrix you input is invalid, please retry")
+                    else:
+                        getAns(0, 0)
+                        print("The Determinant of the Matrix is: ", i)
                 elif key_det == "Invalid, please retry":
                     print(Menu_Det())
         elif key == "Eig":
@@ -292,5 +303,14 @@ def setFileStream():
 def setUserStream():
     sys.stdin = normal_stdin
 
+def getAns(row, col):
+    setUserStream()
+    if row == col and row == 0:
+        ans = input("Ans is : ")
+    else:
+        print("Answer is ", row, "x", col, " matrix: ")
+        ans = input_dis(row, col)
+        setFileStream()
+    return ans
 
 Go()
