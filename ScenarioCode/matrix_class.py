@@ -6,13 +6,13 @@ class Matrix:
         self.matrix = ls_2d.copy()
 
         # column number fixed as len of ls_2d
-        self.col_num: int = len(ls_2d)
-        if self.col_num == 0:
+        self.row_num: int = len(ls_2d)
+        if self.row_num == 0:
             # no elements in this matrix
             print("matrix has no elements")
-        self.row_num: int = len(ls_2d[0])
+        self.col_num: int = len(ls_2d[0])
 
-    def __copy__(self):
+    def copy(self):
         mat = Matrix(self.matrix)
         return mat
 
@@ -98,6 +98,8 @@ class Matrix:
     def size_is_same(self, mat):
         # check sizes of matrices match
         if not (self.row_num == mat.get_row_num() and self.col_num == mat.get_col_num()):
+            print("self.row_num is ", self.row_num, "\nself.col_num is ", self.col_num)
+            print("mat.row_num is ", mat.get_row_num, "mat.col_num is ", mat.get_col_num)
             raise Exception("unmatched sizes")
 
     def get_sum(self, mat):
@@ -106,7 +108,7 @@ class Matrix:
         except Exception as e:
             raise Exception("unmatched sizes")
 
-        ls = [[None for i in range(self.row_num)] for j in range(self.col_num)]
+        ls = [[None for _ in range(self.col_num)] for _ in range(self.row_num)]
         for i in range(self.row_num):
             for j in range(self.col_num):
                 try:
@@ -129,11 +131,13 @@ class Matrix:
         return Matrix(ls)
 
     def get_sub(self, mat):
-        neg_mat = mat.copy().mult_scalar(-1)
+        neg_mat = mat.copy()
+        neg_mat.mult_scalar(-1)
         val = 0
         try:
             val = self.get_sum(neg_mat)
         except Exception as e:
+            print("problem in get_sub")
             print(e)
         return val
 

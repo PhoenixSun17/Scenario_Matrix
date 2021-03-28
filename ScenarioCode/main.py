@@ -11,6 +11,7 @@ store = []
 
 
 def Menu_main():
+
     argument = GetArg()
     switcher = {
         "1": "Op",
@@ -110,7 +111,7 @@ def Go():
                     except ValueError as e:
                         print("The input is Invalid")
                     else:
-                        Mat1.mult_scalar(Mat2).show()
+                        (Mat1.mult_scalar(Mat2)).show()
                 elif key_op == "Invalid, please retry":
                     print(Menu_operation())
         elif key == "Det":
@@ -146,7 +147,7 @@ def Go():
                 if key_Io == "Break":
                     break
                 if key_Io == "Import":
-                    filename = GetArg()
+                    filename = input("file name:")
                     setFileStream(filename)
                     # need to not exit program at this point
                     alternateGo()
@@ -157,11 +158,11 @@ def Go():
                     store.append("5")
                     # get filename
                     # write to that file
-                    filename = GetArg()
+                    filename = input("file name: ")
                     file = open(filename, "w")
                     for line in store:
                         # might need to add \n
-                        file.write(line)
+                        file.write(str(line))
                     file.close()
                     print("Your file has been saved!")
                 elif key_Io == "Invalid, please retry":
@@ -319,7 +320,7 @@ def GetArg():
     print()
     value = input("Please enter a number:")
 
-    store.append(value)
+    store.append(str(value))
     return value
 
 
