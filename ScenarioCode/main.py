@@ -105,8 +105,11 @@ def Go ():
                 elif key_det == "2x2":
                     print("Please Enter one Matrix to calculate Determinant")
                     Mat = GetUserMat()
-                    i = Mat.det()
-                    print("The Determinant of the Matrix is: ",i)
+                    try:
+                        i = Mat.det()
+                        print("The Determinant of the Matrix is: ",i)
+                    except ValueError:
+                        print("The Matrix you input is invalid, please retry")
                 elif key_det == "Invalid, please retry":
                     print(Menu_Det())
         elif key == "Eig":
@@ -182,15 +185,20 @@ def printMenu_IO():
 def GetArg():
     print()
     value = input("Please enter a number:")
-    store.append(int(value))
+
+    store.append(value)
     return value
     
 def GetUserMat():
     print()
-    print("Please Enter 3 if doing 3x3 matrix")
-    print("Or Enter 2 if doing 2x2 matrix")
-    deci = int(GetArg())
-    store.append(int(deci))
+    print("Please Enter a number to assign number of rows in the Matrix")
+    value = GetArg()
+    try:
+        value = int(value)
+    except ValueError:
+        print("Invalid input, please retry")
+        return None
+    store.append(value)
     matrix = input_dis(deci)
     store.append(matrix)
     return matrix
