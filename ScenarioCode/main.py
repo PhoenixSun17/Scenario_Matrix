@@ -17,7 +17,6 @@ def Menu_main ():
         "4": "IO",
         "5": "exit"
     }
-    store.append(int(argument))
     return switcher.get(argument, "Invalid, please retry")
 
 def Menu_operation ():
@@ -29,7 +28,6 @@ def Menu_operation ():
         "4": "Mult Scalar",
         "5": "Break"
     }
-    store.append(int(argument))
     return switcher.get(argument, "Invalid, please retry")
 
 def Menu_Det():
@@ -38,7 +36,6 @@ def Menu_Det():
         "1": "2x2",
         "2": "Break"
     }
-    store.append(int(argument))
     return switcher.get(argument, "Invalid, please retry")
 
 
@@ -49,17 +46,15 @@ def Menu_eigenvalue():
         "2": "EigenVector",
         "3": "Break"
     }
-    store.append(int(argument))
     return switcher.get(argument, "Invalid, please retry")
 
 def Menu_IO():
     argument = GetArg();
     switcher = {
-        1: "Import",
-        2: "Export",
-        3: "Break"
+        "1": "Import",
+        "2": "Export",
+        "3": "Break"
     }
-    store.append(int(argument))
     return switcher.get(argument, "Invalid, please retry")
 
 def Go ():
