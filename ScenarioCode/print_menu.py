@@ -1,6 +1,6 @@
 
 
-def printMenu_main():
+def print_menu_main():
     print("Welcome to Matrix Practice system Ver 1.0.0")
     print("1: Basic Matrix Operation Practice")
     print("2: Determinant Operation Practice")
@@ -12,7 +12,7 @@ def printMenu_main():
     return
 
 
-def printMenu_main2():
+def print_menu_main_alt():
     print("Welcome to Matrix Practice system Ver 1.0.0")
     print("1: Basic Matrix Operation Practice")
     print("2: Determinant Operation Practice")
@@ -23,7 +23,7 @@ def printMenu_main2():
     return
 
 
-def printMenu_op():
+def print_menu_op():
     print("This is the sub menu of operation practice")
     print("1: Do Add Operation")
     print("2: Do Minus Operation")
@@ -35,7 +35,7 @@ def printMenu_op():
     return
 
 
-def printMenu_Det():
+def print_menu_det():
     print("This is the sub menu of determinant practice")
     print("1: Do Determinant Operation")
     print("2: Quit to Main Menu")
@@ -44,7 +44,7 @@ def printMenu_Det():
     return
 
 
-def printMenu_Eig():
+def print_menu_eig():
     print("This is the sub menu of Eigenvalue/vector practice")
     print("1: Do Eigenvalue Operation")
     print("2: Do Eigenvector Operation")
@@ -54,7 +54,7 @@ def printMenu_Eig():
     return
 
 
-def printMenu_IO():
+def print_menu_io():
     print("This is the sub menu of imported practice")
     print("1: Import exercise")
     print("2: Export exercise")
