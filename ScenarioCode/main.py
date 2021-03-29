@@ -121,7 +121,6 @@ def alt_go():
                     break
                 elif key_op == "Add":
                     add_c = int(input())
-                    store.append(add_c)
                     mat_1 = get_user_mat(add_c, False)
                     mat_1.show()
                     print("\n+")
@@ -132,32 +131,38 @@ def alt_go():
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Minus":
                     min_c = int(input())
-                    store.append(min_c)
-                    mat_1 = get_user_mat(min_c)
-                    mat_2 = get_user_mat(min_c)
+                    mat_1 = get_user_mat(min_c, False)
+                    mat_1.show()
+                    print("\n-")
+                    mat_2 = get_user_mat(min_c, False)
+                    mat_2.show()
                     mat_ans = mat_1.get_sub(mat_2)
                     user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Multiply":
                     mul_c_1 = int(input())
-                    store.append(mul_c_1)
-                    mat_1 = get_user_mat(mul_c_1)
+                    mat_1 = get_user_mat(mul_c_1, False)
+                    mat_1.show()
+                    print("\nx")
                     mul_c_2 = int(input())
-                    store.append(mul_c_2)
-                    mat_2 = get_user_mat(mul_c_2)
+                    mat_2 = get_user_mat(mul_c_2, False)
+                    mat_2.show()
                     mat_ans = mat_1.get_product(mat_2)
                     user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Mult Scalar":
                     scc = int(input())
                     store.append(scc)
-                    mat_1 = get_user_mat(scc)
-                    mat_2 = get_arg()
+                    mat_1 = get_user_mat(scc, False)
+                    mat_1.show()
+                    print("\nx")
+                    mat_2 = get_arg(False)
                     try:
                         mat_2 = int(mat_2)
                     except ValueError:
                         print()
                     else:
+                        print(mat_2)
                         mat_ans = mat_1.mult_scalar(mat_2)
                         user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                         compare_ans(user_ans, mat_ans)
@@ -171,13 +176,16 @@ def alt_go():
                     break
                 elif key_det == "2x2":
                     print()
-                    mat = get_user_mat(2)
+                    mat = get_user_mat(2, False)
+                    print("\nDeterminant of : ")
+                    mat.show()
                     try:
                         i = mat.det()
                     except ValueError:
                         print()
                     else:
                         user_ans = get_ans(0, 0)
+                        compare_ans(user_ans, i, True)
 
                 elif key_det == "Invalid, please retry":
                     print(menu_det(False))

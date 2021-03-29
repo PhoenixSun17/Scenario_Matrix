@@ -133,6 +133,7 @@ def get_ans(row, col):
     print()
     if row == col and row == 0:
         ans = input("Ans is : ")
+        ans = int(ans)
     else:
         print("Give your answer\nAnswer is ", row, "x", col, " matrix: ")
         ans = input_matrix(int(col), False)
