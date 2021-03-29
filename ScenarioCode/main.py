@@ -1,4 +1,4 @@
-from display import *
+from print import *
 # noinspection PyUnresolvedReferences
 from matrix_class import *
 import sys
@@ -11,7 +11,6 @@ store = []
 
 
 def Menu_main():
-
     argument = GetArg()
     switcher = {
         "1": "Op",
@@ -81,7 +80,7 @@ def Go():
                     Mat1 = GetUserMat(addc)
                     Mat2 = GetUserMat(addc)
                     Mat_Ans = Mat1.get_sum(Mat2)
-                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
+                    # getAns(Mat_Ans.row_num, Mat_Ans.col_num)
                     Mat_Ans.show()
                 elif key_op == "Minus":
                     minc = int(input("Please enter the number of columns:"))
@@ -89,7 +88,7 @@ def Go():
                     Mat1 = GetUserMat(minc)
                     Mat2 = GetUserMat(minc)
                     Mat_Ans = Mat1.get_sub(Mat2)
-                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
+                    # getAns(Mat_Ans.row_num, Mat_Ans.col_num)
                     Mat_Ans.show()
                 elif key_op == "Multiply":
                     mulc1 = int(input("Please enter the number of columns of first matrix:"))
@@ -99,7 +98,7 @@ def Go():
                     store.append(mulc2)
                     Mat2 = GetUserMat(mulc2)
                     Mat_Ans = Mat1.get_product(Mat2)
-                    getAns(Mat_Ans.row_num, Mat_Ans.col_num)
+                    # getAns(Mat_Ans.row_num, Mat_Ans.col_num)
                     Mat_Ans.show()
                 elif key_op == "Mult Scalar":
                     scc = int(input("Please enter the number of columns:"))
@@ -252,70 +251,6 @@ def alternateGo():
             return
 
 
-def printMenu_main():
-    print("Welcome to Matrix Practice system Ver 1.0.0")
-    print("1: Basic Matrix Operation Practice")
-    print("2: Determinant Operation Practice")
-    print("3: Eigenvalue/Eigenvector Operation Practice")
-    print("4: File IO Function Menu")
-    print("5: Quit the System")
-    print("Enter number to start corresponding practice")
-    print("Invalid number will loop back to main menu")
-    return
-
-
-def printMenu_main2():
-    print("Welcome to Matrix Practice system Ver 1.0.0")
-    print("1: Basic Matrix Operation Practice")
-    print("2: Determinant Operation Practice")
-    print("3: Eigenvalue/Eigenvector Operation Practice")
-    print("5: Quit the System")
-    print("Enter number to start corresponding practice")
-    print("Invalid number will loop back to main menu")
-    return
-
-
-def printMenu_op():
-    print("This is the sub menu of operation practice")
-    print("1: Do Add Operation")
-    print("2: Do Minus Operation")
-    print("3: Do Multiply Matrix Operation")
-    print("4: Do Multiply Scalar Operation")
-    print("5: Quit to Main Menu")
-    print("Enter number to start corresponding practice")
-    print("Invalid number will loop back to this menu")
-    return
-
-
-def printMenu_Det():
-    print("This is the sub menu of determinant practice")
-    print("1: Do Determinant Operation")
-    print("2: Quit to Main Menu")
-    print("Enter number to start corresponding practice")
-    print("Invalid number will loop back to this menu")
-    return
-
-
-def printMenu_Eig():
-    print("This is the sub menu of Eigenvalue/vector practice")
-    print("1: Do Eigenvalue Operation")
-    print("2: Do Eigenvector Operation")
-    print("3: Quit to Main Menu")
-    print("Enter number to start corresponding practice")
-    print("Invalid number will loop back to this menu")
-    return
-
-
-def printMenu_IO():
-    print("This is the sub menu of imported practice")
-    print("1: Import exercise")
-    print("2: Export exercise")
-    print("3: Quit to Main Menu")
-    print("Enter number to start corresponding practice")
-    print("Invalid number will loop back to this menu")
-    return
-
-
 def GetArg():
     print()
     value = input("Please enter a number:")
@@ -348,6 +283,37 @@ def getAns(row, col):
         ans = input_dis(int(col))
         setFileStream()
     return ans
+
+def input_dis(N):     #num of row
+    print('N=', N)
+    print('input :')
+    a = [[int(x) for x in input().split()] for y in range(N)]
+    for i in range(N-1):
+        if len(a[i]) != len(a[i+1]):
+            print('different number of column')
+            return -1
+    return Matrix(a)
+    print(a)
+
+def output_dis(output):
+    if type(output) == int:
+        print(output)
+        return -1
+    if type(output) == list:
+        #r = self.row_num
+        #c = self.col_num
+        n = 0
+        for r in range(len(output)):
+            for c in range(len(output[0])):
+                #n = len(str(output[r][c]))
+                if n < len(str(output[r][c])):
+                    n = len(str(output[r][c]))
+
+        for r in range(len(output)):
+            for c in range(len(output[0])):
+                item = str(output[r][c])
+                print(item + ' '*(n+4-len(item)), end='')
+            print('\n')
 
 
 Go()
