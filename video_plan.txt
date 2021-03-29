@@ -1,0 +1,22 @@
+front end of the system - 
+command line interface - printing statements, linking user input to appropriate functions
+storing user input to save a session - using global variable of a list
+dealing with matrix io - how it links with our way of saving a session, user experience optimisation
+
+back end
+data structure involved - matrix
+how we "read" a session - switching input stream to the file stream, and using alternate go that doesn't print unneccessary statements, only requesting user answer
+getting the user answer - temporarily switch to normal input stream to get user input, then switch back to file stream
+operations 	- for matrix arithmetic, we depend on implementation of the matrix, so better to use methods of Matrix
+		- for determinant operation, we use recursive method to be able to scale up to larger matrices easily
+handling exceptions - in the case of bad input, need to use try except else to handle exceptions elegantly without program crashing
+
+phoenix - cmd line interface, handling exceptions
+2 - 3 min
+laisong - matrix io, operations, organising code, using namespace to import modules properly
+2 - 3 min
+gui - matrix, storing user input to save a session, how we "read" session
+2 - 4 min
+
+backup - emergency time fill in
+how we designed the program - thinking about how to mantain and add features 
