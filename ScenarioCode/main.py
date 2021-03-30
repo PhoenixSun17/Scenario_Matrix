@@ -2,6 +2,7 @@ from ScenarioCode.print_menu import *
 # noinspection PyUnresolvedReferences
 from ScenarioCode.io import *
 from config import store
+from eigenvalue import *
 
 
 def go():
@@ -51,7 +52,7 @@ def go():
                     except ValueError as e:
                         print("The input is Invalid")
                     else:
-                        (mat_1.mult_scalar(mat_2)).show()
+                        (mat_1.multiply_scalar(mat_2)).show()
                 elif key_op == "Invalid, please retry":
                     print(menu_op())
         elif key == "Det":
@@ -74,9 +75,20 @@ def go():
         elif key == "Eig":
             while True:
                 print_menu_eig()
-                if menu_eig() == "Break":
+                key_eig = menu_eig()
+                if key_eig == "Break":
                     break
-                elif menu_eig() == "Invalid, please retry":
+                elif key_eig == "EigenValue":
+                    print("Please Enter one Matrix to calculate Determinant")
+                    c = int(input("Please enter the number of columns:"))
+                    store.append(c)
+                    mat = get_user_mat(c)
+                    eigenvalues = eigenvalue(mat)
+                    print("Eigenvalues are: ")
+                    for val in eigenvalues:
+                        print(val, end="\t")
+
+                elif key_eig == "Invalid, please retry":
                     print(menu_eig())
         elif key == "exit":
             exit()
@@ -163,7 +175,7 @@ def alt_go():
                         print()
                     else:
                         print(mat_2)
-                        mat_ans = mat_1.mult_scalar(mat_2)
+                        mat_ans = mat_1.multiply_scalar(mat_2)
                         user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                         compare_ans(user_ans, mat_ans)
                 elif key_op == "Invalid, please retry":
@@ -194,6 +206,25 @@ def alt_go():
                 # print_menu_eig()
                 if menu_eig(False) == "Break":
                     break
+                elif menu_eig() == "EigenValue":
+                    print()
+                    c = int(input())
+                    mat = get_user_mat(c)
+                    eigenvalues = eigenvalue(mat)
+                    print("\nGive eigenvalues for: ")
+                    mat.show()
+                    user_ans = get_list_ans()
+                    missed_ans = []
+                    for ans in eigenvalues:
+                        if ans not in user_ans:
+                            missed_ans.append(ans)
+                    if len(missed_ans) == 0:
+                        print("\nThat is correct!")
+                    else:
+                        print("\nYou missed: ", end="")
+                        for ans in missed_ans:
+                            print(ans, end="\t")
+
                 elif menu_eig(False) == "Invalid, please retry":
                     print(menu_eig(False))
         elif key == "exit":

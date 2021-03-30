@@ -83,7 +83,6 @@ def input_matrix(n, show=True):  # num of row
         int_line = [int(x) for x in line.split()]
         a[i] = int_line
 
-    # a = [[int(x) for x in input().split()] for y in range(N)]
     for i in range(n - 1):
         if (len(a[i]) != len(a[i + 1])) and show:
             print('different number of column')
@@ -139,6 +138,15 @@ def get_ans(row, col):
         ans = input_matrix(int(col), False)
         set_file_stream()
     return ans
+
+def get_list_ans():
+    set_user_stream()
+    print()
+    ans = input("Answers (separated by space): ")
+    ls = ans.split()
+    xs = [int(x) for x in ls]
+    set_file_stream()
+    return xs
 
 
 def compare_ans(user_ans, sys_ans, is_int=False):
