@@ -85,8 +85,7 @@ def input_matrix(n, show=True):  # num of row
 
     for i in range(n - 1):
         if (len(a[i]) != len(a[i + 1])) and show:
-            print('different number of column')
-            return -1
+            raise Exception('different number of column')
     return Matrix(a)
 
 

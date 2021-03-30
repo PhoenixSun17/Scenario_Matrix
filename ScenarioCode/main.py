@@ -1,7 +1,7 @@
 from ScenarioCode.print_menu import *
 # noinspection PyUnresolvedReferences
 from ScenarioCode.io import *
-from config import store
+import config
 from eigenvalue import *
 
 
@@ -18,7 +18,7 @@ def go():
                     break
                 elif key_op == "Add":
                     add_c = int(input("Please enter the number of columns:"))
-                    store.append(add_c)
+                    config.store.append(add_c)
                     mat_1 = get_user_mat(add_c)
                     mat_2 = get_user_mat(add_c)
                     mat_ans = mat_1.get_sum(mat_2)
@@ -26,7 +26,7 @@ def go():
                     mat_ans.show()
                 elif key_op == "Minus":
                     min_c = int(input("Please enter the number of columns:"))
-                    store.append(min_c)
+                    config.store.append(min_c)
                     mat_1 = get_user_mat(min_c)
                     mat_2 = get_user_mat(min_c)
                     mat_ans = mat_1.get_sub(mat_2)
@@ -34,17 +34,17 @@ def go():
                     mat_ans.show()
                 elif key_op == "Multiply":
                     mul_c_1 = int(input("Please enter the number of columns of first matrix:"))
-                    store.append(mul_c_1)
+                    config.store.append(mul_c_1)
                     mat_1 = get_user_mat(mul_c_1)
                     mul_c_2 = int(input("Please enter the number of columns of second matrix:"))
-                    store.append(mul_c_2)
+                    config.store.append(mul_c_2)
                     mat_2 = get_user_mat(mul_c_2)
                     mat_ans = mat_1.get_product(mat_2)
                     # getAns(mat_ans.row_num, mat_ans.col_num)
                     mat_ans.show()
                 elif key_op == "Mult Scalar":
                     scc = int(input("Please enter the number of columns:"))
-                    store.append(scc)
+                    config.store.append(scc)
                     mat_1 = get_user_mat(scc)
                     mat_2 = get_arg()
                     try:
@@ -52,7 +52,8 @@ def go():
                     except ValueError as e:
                         print("The input is Invalid")
                     else:
-                        (mat_1.multiply_scalar(mat_2)).show()
+                        mat_1.multiply_scalar(mat_2)
+                        mat_1.show()
                 elif key_op == "Invalid, please retry":
                     print(menu_op())
         elif key == "Det":
@@ -81,22 +82,25 @@ def go():
                 elif key_eig == "EigenValue":
                     print("Please Enter one Matrix to calculate Determinant")
                     c = int(input("Please enter the number of columns:"))
-                    store.append(c)
+                    config.store.append(c)
                     mat = get_user_mat(c)
                     eigenvalues = eigenvalue(mat)
                     print("Eigenvalues are: ")
                     for val in eigenvalues:
                         print(val, end="\t")
+                    print("\n")
 
                 elif key_eig == "Invalid, please retry":
                     print(menu_eig())
         elif key == "exit":
             exit()
         elif key == "IO":
+            current_store = config.store.copy()
             while True:
                 print_menu_io()
                 key_io = menu_io()
                 if key_io == "Break":
+                    config.store = current_store
                     break
                 if key_io == "Import":
                     filename = input("file name:")
@@ -104,12 +108,12 @@ def go():
                     alt_go()
                     set_user_stream()
                 if key_io == "Export":
-                    store.pop()
-                    store.pop()
-                    store.append("5")
+                    config.store.pop()
+                    config.store.pop()
+                    config.store.append("5")
                     filename = input("file name: ")
                     file = open(filename, "w")
-                    for line in store:
+                    for line in config.store:
                         file.write(str(line))
                         file.write("\n")
                     file.close()
@@ -164,7 +168,7 @@ def alt_go():
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Mult Scalar":
                     scc = int(input())
-                    store.append(scc)
+                    config.store.append(scc)
                     mat_1 = get_user_mat(scc, False)
                     mat_1.show()
                     print("\nx")
@@ -175,7 +179,8 @@ def alt_go():
                         print()
                     else:
                         print(mat_2)
-                        mat_ans = mat_1.multiply_scalar(mat_2)
+                        mat_1.multiply_scalar(mat_2)
+                        mat_ans = mat_1
                         user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                         compare_ans(user_ans, mat_ans)
                 elif key_op == "Invalid, please retry":
@@ -204,12 +209,13 @@ def alt_go():
         elif key == "Eig":
             while True:
                 # print_menu_eig()
-                if menu_eig(False) == "Break":
+                key_eig = menu_eig()
+                if key_eig == "Break":
                     break
-                elif menu_eig() == "EigenValue":
+                elif key_eig == "EigenValue":
                     print()
                     c = int(input())
-                    mat = get_user_mat(c)
+                    mat = get_user_mat(c, False)
                     eigenvalues = eigenvalue(mat)
                     print("\nGive eigenvalues for: ")
                     mat.show()
@@ -225,7 +231,7 @@ def alt_go():
                         for ans in missed_ans:
                             print(ans, end="\t")
 
-                elif menu_eig(False) == "Invalid, please retry":
+                elif key_eig == "Invalid, please retry":
                     print(menu_eig(False))
         elif key == "exit":
             print("Exercise is complete!\n")

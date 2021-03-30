@@ -1,7 +1,7 @@
 import math
 from collections.abc import Iterable
 from copy import deepcopy
-from matrix_class import *
+from matrix_class import Matrix
 
 def mod(vector):
     '''
@@ -96,11 +96,11 @@ def eigenvalue(A):
                 Ak[row][col] = scalar_product(v1, v2)
                 #print(Ak)
                 sum += abs(Ak[row][col]-Ak0[row][col])
-        if (sum < 1e-6):
+        if sum < 1e-6:
             flag = 0
     return roundM([Ak[i][i] for i in range(cols)])
 
 
 if __name__ == '__main__':
-    m = Matrix( [[1, 1, 1], [0, 2, 1], [0, 0, 3]])
+    m = Matrix( [[9, 7], [9, 2]])
     print(eigenvalue(m))

@@ -30,24 +30,6 @@ class Matrix:
     def get_col_num(self) -> int:
         return self.col_num
 
-    # auxiliary function that raises exception if index is out of bounds
-    def is_valid_index(self, row_i: int, col_i: int) -> bool:
-        r = self.get_row_num()
-        c = self.get_col_num()
-        return r > row_i >= 0 and c > col_i >= 0
-
-    # auxiliary function that returns false if sizes of matrices are not the same
-    def size_is_same(self, mat: 'Matrix') -> bool:
-        r = self.get_row_num()
-        c = self.get_col_num()
-        return r == mat.get_row_num() and c == mat.get_col_num()
-
-    # swaps two rows by index, useful for gaussian elimination
-    def swap_row(self, row_i_1: int, row_i_2: int):
-        tmp = self.matrix[row_i_1]
-        self.matrix[row_i_1] = self.matrix[row_i_2]
-        self.matrix[row_i_2] = tmp
-
     # getter function for item by index
     def get_item(self, row_i: int, col_i: int) -> int:
         # check that indexes are valid
@@ -114,7 +96,7 @@ class Matrix:
     # call on matrix 1, give argument matrix 2 to get matrix 1 + matrix 2 - returns Matrix object
     # will throw exception if sizes do not match
     def get_sum(self, mat: 'Matrix') -> 'Matrix':
-        if self.size_is_same(mat):
+        if not self.size_is_same(mat):
             raise Exception("unmatched sizes")
         r = self.get_row_num()
         c = self.get_col_num()
@@ -166,7 +148,7 @@ class Matrix:
 
     # check if two matrices have same size and values - useful in comparing answers
     def is_equal(self, mat: 'Matrix') -> bool:
-        if self.size_is_same(mat):
+        if not self.size_is_same(mat):
             raise Exception("sizes unmatched")
 
         for i in range(self.get_row_num()):
@@ -174,6 +156,24 @@ class Matrix:
                 if self.get_item(i, j) != mat.get_item(i, j):
                     return False
         return True
+
+    # auxiliary function that raises exception if index is out of bounds
+    def is_valid_index(self, row_i: int, col_i: int) -> bool:
+        r = self.get_row_num()
+        c = self.get_col_num()
+        return r > row_i >= 0 and c > col_i >= 0
+
+    # auxiliary function that returns false if sizes of matrices are not the same
+    def size_is_same(self, mat: 'Matrix') -> bool:
+        r = self.get_row_num()
+        c = self.get_col_num()
+        return r == mat.get_row_num() and c == mat.get_col_num()
+
+    # swaps two rows by index, useful for gaussian elimination
+    def swap_row(self, row_i_1: int, row_i_2: int):
+        tmp = self.matrix[row_i_1]
+        self.matrix[row_i_1] = self.matrix[row_i_2]
+        self.matrix[row_i_2] = tmp
 
     # displays a Matrix object as list of lists - useful in debugging and cmd line interface
     def show(self):
