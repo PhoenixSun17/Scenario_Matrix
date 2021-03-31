@@ -57,7 +57,7 @@ def eigenvalue(A, eps=1e-6):
 
 
 if __name__ == '__main__':
-    #A = np.array([[9, 7], [9, 2]], dtype='float')
+    # A = np.array([[9, 7], [9, 2]], dtype='float')
     A = [[9, 8, 1], [7, 6, 5], [4, 3, 2]]
     m = Matrix(A)
     eig = eigenvalue(m,1e-7)
