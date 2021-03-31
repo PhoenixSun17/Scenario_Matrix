@@ -1,4 +1,4 @@
-from ScenarioCode.matrix_class import Matrix
+from matrix_class import Matrix
 import config
 import sys
 
@@ -86,6 +86,7 @@ def input_matrix(n, show=True):  # num of row
     for i in range(n - 1):
         if (len(a[i]) != len(a[i + 1])) and show:
             raise Exception('different number of column')
+            return -1
     return Matrix(a)
 
 
@@ -134,7 +135,7 @@ def get_ans(row, col):
         ans = int(ans)
     else:
         print("Give your answer\nAnswer is ", row, "x", col, " matrix: ")
-        ans = input_matrix(int(col), False)
+        ans = input_matrix(int(row), False)
         set_file_stream()
     return ans
 
