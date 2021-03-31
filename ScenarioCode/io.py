@@ -1,4 +1,4 @@
-from ScenarioCode.matrix_class import Matrix
+from matrix_class import Matrix
 import config
 import sys
 
@@ -74,6 +74,7 @@ def set_user_stream():
 def input_matrix(n, show=True):  # num of row
     while True:
         if show:
+<<<<<<< HEAD
             print('N=', n)
             print('input :')
         a = [[] for _ in range(n)]
@@ -89,6 +90,16 @@ def input_matrix(n, show=True):  # num of row
                 print("\nInvalid input. Please try again: ")
                 continue
         break
+=======
+            config.store.append(line)
+        int_line = [int(x) for x in line.split()]
+        a[i] = int_line
+
+    for i in range(n - 1):
+        if (len(a[i]) != len(a[i + 1])) and show:
+            raise Exception('different number of column')
+            return -1
+>>>>>>> c948ee700fad50f7c4c0c2ed8f449678482009fb
     return Matrix(a)
 
 
@@ -137,7 +148,7 @@ def get_ans(row, col):
         ans = int(ans)
     else:
         print("Give your answer\nAnswer is ", row, "x", col, " matrix: ")
-        ans = input_matrix(int(col), False)
+        ans = input_matrix(int(row), False)
         set_file_stream()
     return ans
 

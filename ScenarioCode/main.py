@@ -4,7 +4,6 @@ from ScenarioCode.io import *
 import config
 from eigenvalue_v2 import *
 
-
 def go():
     print()
     while True:
@@ -66,8 +65,7 @@ def go():
                         print("The input is Invalid\n")
                         config.store = current_store
                     else:
-                        mat_1.multiply_scalar(mat_2)
-                        mat_1.show()
+                        (mat_1.multiply_scalar(mat_2)).show()
                 elif key_op == "Invalid, please retry":
                     print(menu_op())
         elif key == "Det":
@@ -98,9 +96,10 @@ def go():
                     break
                 elif key_eig == "EigenValue":
                     print("Please Enter one Matrix to calculate Determinant")
-                    c = int(input("Please enter the number of columns:"))
+                    c = int(input("Please enter the number of rows:"))
                     config.store.append(c)
                     mat = get_user_mat(c)
+<<<<<<< HEAD
                     try:
                         eigenvalues = eigenvalue(mat)
                     except Exception as e:
@@ -111,6 +110,12 @@ def go():
                         for val in eigenvalues:
                             print(val, end="\t\t")
                         print("\n")
+=======
+                    eigenvalues = eigenvalue(mat)
+                    print("Eigenvalues are: ")
+                    for val in eigenvalues:
+                        print(val, end="\t")
+>>>>>>> c948ee700fad50f7c4c0c2ed8f449678482009fb
 
                 elif key_eig == "Invalid, please retry":
                     print(menu_eig())
@@ -167,7 +172,7 @@ def alt_go():
                 if key_op == "Break":
                     break
                 elif key_op == "Add":
-                    add_c = int(input())
+                    add_c = int(input("Please enter the number of rows:"))
                     mat_1 = get_user_mat(add_c, False)
                     mat_1.show()
                     print("\n+")
@@ -177,7 +182,7 @@ def alt_go():
                     user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Minus":
-                    min_c = int(input())
+                    min_c = int(input("Please enter the number of rows:"))
                     mat_1 = get_user_mat(min_c, False)
                     mat_1.show()
                     print("\n-")
@@ -187,11 +192,11 @@ def alt_go():
                     user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Multiply":
-                    mul_c_1 = int(input())
+                    mul_c_1 = int(input("Please enter the number of rows of first matrix:"))
                     mat_1 = get_user_mat(mul_c_1, False)
                     mat_1.show()
                     print("\nx")
-                    mul_c_2 = int(input())
+                    mul_c_2 = int(input("Please enter the number of rows of second matrix:"))
                     mat_2 = get_user_mat(mul_c_2, False)
                     mat_2.show()
                     mat_ans = mat_1.get_product(mat_2)
@@ -210,8 +215,7 @@ def alt_go():
                         print()
                     else:
                         print(mat_2)
-                        mat_1.multiply_scalar(mat_2)
-                        mat_ans = mat_1
+                        mat_ans = mat_1.multiply_scalar(mat_2)
                         user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                         compare_ans(user_ans, mat_ans)
                 elif key_op == "Invalid, please retry":
@@ -245,8 +249,8 @@ def alt_go():
                     break
                 elif key_eig == "EigenValue":
                     print()
-                    c = int(input())
-                    mat = get_user_mat(c, False)
+                    c = int(input("Please enter the number of rows:"))
+                    mat = get_user_mat(c)
                     eigenvalues = eigenvalue(mat)
                     print("\nGive eigenvalues for: ")
                     mat.show()
@@ -270,3 +274,4 @@ def alt_go():
 
 
 go()
+

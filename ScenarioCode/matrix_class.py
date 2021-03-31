@@ -141,9 +141,11 @@ class Matrix:
     # call on a matrix to multiply all contents by a scalar value
     # does not return anything - this only changes instance object's values
     def multiply_scalar(self, scalar_val: int):
-        for row in self.matrix:
-            for c_i in range(len(row)):
-                row[c_i] *= scalar_val
+        m = self.matrix
+        for row in range(len(m)):
+            for c_i in range(len(m[0])):
+                m[row][c_i] *= scalar_val
+        return Matrix(m)
 
     # check if two matrices have same size and values - useful in comparing answers
     def is_equal(self, mat: 'Matrix') -> bool:

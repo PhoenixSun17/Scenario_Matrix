@@ -1,7 +1,7 @@
 import math
 from collections.abc import Iterable
 from copy import deepcopy
-from matrix_class import Matrix
+from matrix_class import *
 
 def mod(vector):
     '''
@@ -81,25 +81,33 @@ def eigenvalue(A):
     Find all the eigenvalues of the matrix
     '''
     # modified Ak here to take in a Matrix object
-    Ak = [A.get_row(i) for i in range(A.get_row_num())]
-    rows = len(Ak)
-    cols = len(Ak[0])
-    flag = 1
-    while flag:
-        Ak0 = deepcopy(Ak)
-        Qk, Rk = get_QR(Ak)
-        sum = 0
-        for row in range(rows):
-            v1 = [Rk[row][i] for i in range(cols)]
-            for col in range(cols):
-                v2 = [Qk[i][col] for i in range(rows)]
-                Ak[row][col] = scalar_product(v1, v2)
-                #print(Ak)
-                sum += abs(Ak[row][col]-Ak0[row][col])
-        if sum < 1e-6:
-            flag = 0
-    return roundM([Ak[i][i] for i in range(cols)])
-
+    r = A.get_row_num()
+    c = A.get_col_num()
+    if r != c:
+        raise Exception("called eigenvalue on non-square matrix")
+    else:
+        Ak = [A.get_row(i) for i in range(A.get_row_num())]
+        rows = len(Ak)
+        cols = len(Ak[0])
+        flag = 1
+        while flag:
+            Ak0 = deepcopy(Ak)
+            Qk, Rk = get_QR(Ak)
+            sum = 0
+            for row in range(rows):
+                v1 = [Rk[row][i] for i in range(cols)]
+                for col in range(cols):
+                    try:
+                        v2 = [Qk[i][col] for i in range(rows)]
+                        Ak[row][col] = scalar_product(v1, v2)
+                        #print(Ak)
+                        sum += abs(Ak[row][col]-Ak0[row][col])
+                    except Exception as e:
+                        print("problem when getting eigenvalue")
+                        print(e)
+            if (sum < 1e-6):
+                flag = 0
+        return roundM([Ak[i][i] for i in range(cols)])
 
 if __name__ == '__main__':
     m = Matrix( [[9, 7], [9, 2]])
