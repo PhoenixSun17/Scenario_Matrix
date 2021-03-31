@@ -69,7 +69,7 @@ def go():
                         mat_ans.show()
                 elif key_op == "Invalid, please retry":
                     print(menu_op())
-        elif key == "Det":
+                elif key == "Det":
             while True:
                 current_store = config.store.copy()
                 print_menu_det()
@@ -77,8 +77,10 @@ def go():
                 if key_det == "Break":
                     break
                 elif key_det == "2x2":
+                    n = int(input("Please enter the number of rows:"))
+                    config.store.append(n)
                     print("Please Enter one Matrix to calculate Determinant")
-                    mat = get_user_mat(2)
+                    mat = get_user_mat(n)
                     try:
                         i = mat.det()
                     except ValueError:
@@ -228,8 +230,10 @@ def alt_go():
                 if key_det == "Break":
                     break
                 elif key_det == "2x2":
-                    print()
-                    mat = get_user_mat(2, False)
+                    n = int(input("Please enter the number of rows:"))
+                    config.store.append(n)
+                    print("Please Enter one Matrix to calculate Determinant")
+                    mat = get_user_mat(n, False)
                     print("\nDeterminant of : ")
                     mat.show()
                     try:
