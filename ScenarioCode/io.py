@@ -74,7 +74,6 @@ def set_user_stream():
 def input_matrix(n, show=True):  # num of row
     while True:
         if show:
-<<<<<<< HEAD
             print('N=', n)
             print('input :')
         a = [[] for _ in range(n)]
@@ -90,7 +89,6 @@ def input_matrix(n, show=True):  # num of row
                 print("\nInvalid input. Please try again: ")
                 continue
         break
-=======
             config.store.append(line)
         int_line = [int(x) for x in line.split()]
         a[i] = int_line
@@ -99,7 +97,6 @@ def input_matrix(n, show=True):  # num of row
         if (len(a[i]) != len(a[i + 1])) and show:
             raise Exception('different number of column')
             return -1
->>>>>>> c948ee700fad50f7c4c0c2ed8f449678482009fb
     return Matrix(a)
 
 
