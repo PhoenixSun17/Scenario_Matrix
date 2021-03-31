@@ -2,7 +2,7 @@ from ScenarioCode.print_menu import *
 # noinspection PyUnresolvedReferences
 from ScenarioCode.io import *
 import config
-from eigenvalue import *
+from eigenvalue_v2 import *
 
 
 def go():
@@ -12,45 +12,59 @@ def go():
         key = menu_main()
         if key == "Op":
             while True:
+                current_store = config.store.copy()
                 print_menu_op()
                 key_op = menu_op()
                 if key_op == "Break":
                     break
                 elif key_op == "Add":
-                    add_c = int(input("Please enter the number of columns:"))
+                    add_c = int(input("Please enter the number of rows:"))
                     config.store.append(add_c)
                     mat_1 = get_user_mat(add_c)
                     mat_2 = get_user_mat(add_c)
-                    mat_ans = mat_1.get_sum(mat_2)
-                    # getAns(mat_ans.row_num, mat_ans.col_num)
-                    mat_ans.show()
+                    try:
+                        mat_ans = mat_1.get_sum(mat_2)
+                    except ArithmeticError as e:
+                        print("Invalid sum operation on matrices of different sizes\n")
+                        config.store = current_store
+                    else:
+                        mat_ans.show()
                 elif key_op == "Minus":
-                    min_c = int(input("Please enter the number of columns:"))
+                    min_c = int(input("Please enter the number of rows:"))
                     config.store.append(min_c)
                     mat_1 = get_user_mat(min_c)
                     mat_2 = get_user_mat(min_c)
-                    mat_ans = mat_1.get_sub(mat_2)
-                    # getAns(mat_ans.row_num, mat_ans.col_num)
-                    mat_ans.show()
+                    try:
+                        mat_ans = mat_1.get_sub(mat_2)
+                    except ArithmeticError as e:
+                        print("Invalid subtraction operation on matrices of different sizes\n")
+                        config.store = current_store
+                    else:
+                        mat_ans.show()
                 elif key_op == "Multiply":
-                    mul_c_1 = int(input("Please enter the number of columns of first matrix:"))
+                    mul_c_1 = int(input("Please enter the number of rows of first matrix:"))
                     config.store.append(mul_c_1)
                     mat_1 = get_user_mat(mul_c_1)
-                    mul_c_2 = int(input("Please enter the number of columns of second matrix:"))
+                    mul_c_2 = int(input("Please enter the number of rows of second matrix:"))
                     config.store.append(mul_c_2)
                     mat_2 = get_user_mat(mul_c_2)
-                    mat_ans = mat_1.get_product(mat_2)
-                    # getAns(mat_ans.row_num, mat_ans.col_num)
-                    mat_ans.show()
+                    try:
+                        mat_ans = mat_1.get_product(mat_2)
+                    except ArithmeticError:
+                        print("Invalid multiplication operation on matrices of unmatched sizes\n")
+                        config.store = current_store
+                    else:
+                        mat_ans.show()
                 elif key_op == "Mult Scalar":
-                    scc = int(input("Please enter the number of columns:"))
+                    scc = int(input("Please enter the number of rows:"))
                     config.store.append(scc)
                     mat_1 = get_user_mat(scc)
                     mat_2 = get_arg()
                     try:
                         mat_2 = int(mat_2)
                     except ValueError as e:
-                        print("The input is Invalid")
+                        print("The input is Invalid\n")
+                        config.store = current_store
                     else:
                         mat_1.multiply_scalar(mat_2)
                         mat_1.show()
@@ -58,6 +72,7 @@ def go():
                     print(menu_op())
         elif key == "Det":
             while True:
+                current_store = config.store.copy()
                 print_menu_det()
                 key_det = menu_det()
                 if key_det == "Break":
@@ -68,13 +83,15 @@ def go():
                     try:
                         i = mat.det()
                     except ValueError:
-                        print("The Matrix you input is invalid, please retry")
+                        print("The Matrix you input is invalid, please retry\n")
+                        config.store = current_store
                     else:
                         print("The Determinant of the Matrix is: ", i)
                 elif key_det == "Invalid, please retry":
                     print(menu_det())
         elif key == "Eig":
             while True:
+                current_store = config.store.copy()
                 print_menu_eig()
                 key_eig = menu_eig()
                 if key_eig == "Break":
@@ -84,11 +101,16 @@ def go():
                     c = int(input("Please enter the number of columns:"))
                     config.store.append(c)
                     mat = get_user_mat(c)
-                    eigenvalues = eigenvalue(mat)
-                    print("Eigenvalues are: ")
-                    for val in eigenvalues:
-                        print(val, end="\t")
-                    print("\n")
+                    try:
+                        eigenvalues = eigenvalue(mat)
+                    except Exception as e:
+                        print("invalid matrix\n")
+                        config.store = current_store
+                    else:
+                        print("Eigenvalues are: ")
+                        for val in eigenvalues:
+                            print(val, end="\t\t")
+                        print("\n")
 
                 elif key_eig == "Invalid, please retry":
                     print(menu_eig())
@@ -104,20 +126,29 @@ def go():
                     break
                 if key_io == "Import":
                     filename = input("file name:")
-                    open_file_stream(filename)
-                    alt_go()
+                    try:
+                        open_file_stream(filename)
+                    except FileNotFoundError as fnfe:
+                        print("invalid file")
+                    else:
+                        alt_go()
                     set_user_stream()
                 if key_io == "Export":
                     config.store.pop()
                     config.store.pop()
                     config.store.append("5")
                     filename = input("file name: ")
-                    file = open(filename, "w")
-                    for line in config.store:
-                        file.write(str(line))
-                        file.write("\n")
-                    file.close()
-                    print("Your file has been saved!")
+                    try:
+                        file = open(filename, "w")
+                    except FileNotFoundError as fnfe:
+                        print("file not found")
+                    else:
+                        for line in config.store:
+                            file.write(str(line))
+                            file.write("\n")
+                        print("Your file has been saved!")
+                    finally:
+                        file.close()
                 elif key_io == "Invalid, please retry":
                     print_menu_io()
         else:

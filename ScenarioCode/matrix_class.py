@@ -78,7 +78,7 @@ class Matrix:
     # will throw exception if sizes do not match
     def get_product(self, mat: 'Matrix') -> 'Matrix':  # should ensure type here is a Matrix object):
         if self.col_num != mat.get_row_num():
-            raise Exception("Invalid multiplication of matrices")
+            raise ArithmeticError("Invalid multiplication of matrices")
         ri = self.get_row_num()
         c2 = mat.get_col_num()
         c1 = self.get_col_num()
@@ -97,7 +97,7 @@ class Matrix:
     # will throw exception if sizes do not match
     def get_sum(self, mat: 'Matrix') -> 'Matrix':
         if not self.size_is_same(mat):
-            raise Exception("unmatched sizes")
+            raise ArithmeticError("unmatched sizes")
         r = self.get_row_num()
         c = self.get_col_num()
         ls = [[0 for _ in range(c)] for _ in range(r)]
@@ -115,13 +115,12 @@ class Matrix:
     def get_sub(self, mat: 'Matrix') -> 'Matrix':
         neg_mat = mat.copy()
         neg_mat.multiply_scalar(-1)
-        val = 0
         try:
             val = self.get_sum(neg_mat)
-        except Exception as e:
-            print("problem in get_sub")
-            print(e)
-        return val
+        except ArithmeticError as ae:
+            raise ae
+        else:
+            return val
 
     # call on matrix 1 to get its determinant
     # will throw exception if called on non-square matrix
@@ -157,7 +156,7 @@ class Matrix:
                     return False
         return True
 
-    # auxiliary function that raises exception if index is out of bounds
+    # auxiliary function that returns false if indexes not valid
     def is_valid_index(self, row_i: int, col_i: int) -> bool:
         r = self.get_row_num()
         c = self.get_col_num()
