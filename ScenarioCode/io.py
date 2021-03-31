@@ -89,14 +89,7 @@ def input_matrix(n, show=True):  # num of row
                 print("\nInvalid input. Please try again: ")
                 continue
         break
-        config.store.append(line)
-        int_line = [int(x) for x in line.split()]
-        a[i] = int_line
 
-    for i in range(n - 1):
-        if (len(a[i]) != len(a[i + 1])) and show:
-            raise Exception('different number of column')
-            return -1
     return Matrix(a)
 
 
@@ -118,7 +111,8 @@ def output_matrix(output):
             for c in range(len(output[0])):
                 item = str(output[r][c])
                 print(item + ' ' * (n + 4 - len(item)), end='')
-            print('\n')
+            print("\n")
+
 
 
 def get_arg(show=True):
@@ -163,7 +157,11 @@ def compare_ans(user_ans, sys_ans, is_int=False):
     if is_int:
         check_eq(user_ans == sys_ans, lambda: print(sys_ans))
     else:
-        check_eq(user_ans.is_equal(sys_ans), lambda: sys_ans.show())
+        try:
+            check_eq(user_ans.is_equal(sys_ans), lambda: sys_ans.show())
+        except Exception as e:
+            print("\nThat is wrong!\n This is the correct answer")
+
 
     print("\nType anything to continue")
     set_user_stream()
