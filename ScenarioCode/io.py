@@ -89,7 +89,7 @@ def input_matrix(n, show=True):  # num of row
                 print("\nInvalid input. Please try again: ")
                 continue
         break
-            config.store.append(line)
+        config.store.append(line)
         int_line = [int(x) for x in line.split()]
         a[i] = int_line
 
