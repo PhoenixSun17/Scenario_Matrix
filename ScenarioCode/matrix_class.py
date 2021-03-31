@@ -79,6 +79,7 @@ class Matrix:
     def get_product(self, mat: 'Matrix') -> 'Matrix':  # should ensure type here is a Matrix object):
         if self.col_num != mat.get_row_num():
             raise ArithmeticError("Invalid multiplication of matrices")
+
         ri = self.get_row_num()
         c2 = mat.get_col_num()
         c1 = self.get_col_num()
