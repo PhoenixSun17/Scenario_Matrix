@@ -17,8 +17,15 @@ def go():
                 if key_op == "Break":
                     break
                 elif key_op == "Add":
-                    add_c = int(input("Please enter the number of rows:"))
-                    config.store.append(add_c)
+                    while True:
+                        try:
+                            add_c = int(input("Please enter the number of rows:"))
+                            config.store.append(add_c)
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break                        
                     mat_1 = get_user_mat(add_c)
                     mat_2 = get_user_mat(add_c)
                     try:
@@ -29,8 +36,15 @@ def go():
                     else:
                         mat_ans.show()
                 elif key_op == "Minus":
-                    min_c = int(input("Please enter the number of rows:"))
-                    config.store.append(min_c)
+                    while True:
+                        try:
+                            min_c = int(input("Please enter the number of rows:"))
+                            config.store.append(min_c)
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat_1 = get_user_mat(min_c)
                     mat_2 = get_user_mat(min_c)
                     try:
@@ -41,11 +55,18 @@ def go():
                     else:
                         mat_ans.show()
                 elif key_op == "Multiply":
-                    mul_c_1 = int(input("Please enter the number of rows of first matrix:"))
-                    config.store.append(mul_c_1)
+                    while True:
+                        try:
+                            mul_c_1 = int(input("Please enter the number of rows of first matrix:"))
+                            config.store.append(mul_c_1)
+                            mul_c_2 = int(input("Please enter the number of rows of second matrix:"))
+                            config.store.append(mul_c_2)
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat_1 = get_user_mat(mul_c_1)
-                    mul_c_2 = int(input("Please enter the number of rows of second matrix:"))
-                    config.store.append(mul_c_2)
                     mat_2 = get_user_mat(mul_c_2)
                     try:
                         mat_ans = mat_1.get_product(mat_2)
@@ -55,8 +76,15 @@ def go():
                     else:
                         mat_ans.show()
                 elif key_op == "Mult Scalar":
-                    scc = int(input("Please enter the number of rows:"))
-                    config.store.append(scc)
+                    while True:
+                        try:
+                            scc = int(input("Please enter the number of rows:"))
+                            config.store.append(scc)
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat_1 = get_user_mat(scc)
                     mat_2 = get_arg()
                     try:
@@ -69,7 +97,7 @@ def go():
                         mat_ans.show()
                 elif key_op == "Invalid, please retry":
                     print(menu_op())
-                elif key == "Det":
+        elif key == "Det":
             while True:
                 current_store = config.store.copy()
                 print_menu_det()
@@ -77,8 +105,15 @@ def go():
                 if key_det == "Break":
                     break
                 elif key_det == "2x2":
-                    n = int(input("Please enter the number of rows:"))
-                    config.store.append(n)
+                    while True:
+                        try:
+                            n = int(input("Please enter the number of rows:"))
+                            config.store.append(n)
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break            
                     print("Please Enter one Matrix to calculate Determinant")
                     mat = get_user_mat(n)
                     try:
@@ -98,9 +133,16 @@ def go():
                 if key_eig == "Break":
                     break
                 elif key_eig == "EigenValue":
+                    while True:
+                        try:
+                            c = int(input("Please enter the number of rows:"))
+                            config.store.append(c)
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     print("Please Enter one Matrix to calculate Eigenvalue")
-                    c = int(input("Please enter the number of rows:"))
-                    config.store.append(c)
                     mat = get_user_mat(c)
 
                     try:
@@ -174,7 +216,14 @@ def alt_go():
                 if key_op == "Break":
                     break
                 elif key_op == "Add":
-                    add_c = int(input())
+                    while True:
+                        try:
+                            add_c = int(input("Please enter the number of rows:"))
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat_1 = get_user_mat(add_c, False)
                     mat_1.show()
                     print("\n+")
@@ -184,7 +233,14 @@ def alt_go():
                     user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Minus":
-                    min_c = int(input())
+                    while True:
+                        try:
+                            min_c = int(input("Please enter the number of rows:"))
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat_1 = get_user_mat(min_c, False)
                     mat_1.show()
                     print("\n-")
@@ -194,19 +250,32 @@ def alt_go():
                     user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Multiply":
-                    mul_c_1 = int(input())
+                    while True:
+                        try:
+                            mul_c_1 = int(input("Please enter the number of rows of first matrix:"))
+                            mul_c_2 = int(input("Please enter the number of rows of second matrix:"))
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat_1 = get_user_mat(mul_c_1, False)
                     mat_1.show()
                     print("\nx")
-                    mul_c_2 = int(input())
                     mat_2 = get_user_mat(mul_c_2, False)
                     mat_2.show()
                     mat_ans = mat_1.get_product(mat_2)
                     user_ans = get_ans(mat_ans.row_num, mat_ans.col_num)
                     compare_ans(user_ans, mat_ans)
                 elif key_op == "Mult Scalar":
-                    scc = int(input())
-                    config.store.append(scc)
+                    while True:
+                        try:
+                            scc = int(input("Please enter the number of rows:"))
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat_1 = get_user_mat(scc, False)
                     mat_1.show()
                     print("\nx")
@@ -230,9 +299,15 @@ def alt_go():
                 if key_det == "Break":
                     break
                 elif key_det == "2x2":
-                    n = int(input("Please enter the number of rows:"))
-                    config.store.append(n)
-                    print("Please Enter one Matrix to calculate Determinant")
+                    while True:
+                        try:
+                            n = int(input("Please enter the number of rows:"))
+                            config.store.append(n)
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat = get_user_mat(n, False)
                     print("\nDeterminant of : ")
                     mat.show()
@@ -253,8 +328,15 @@ def alt_go():
                 if key_eig == "Break":
                     break
                 elif key_eig == "EigenValue":
-                    print()
-                    c = int(input())
+                    while True:
+                        try:
+                            c = int(input("Please enter the number of rows:"))
+                            config.store.append(c)
+                        except ValueError:
+                            print("invalid number of rows")
+                            continue
+                        else:
+                            break
                     mat = get_user_mat(c, False)
                     eigenvalues = eigenvalue(mat)
                     print("\nGive eigenvalues for: ")
@@ -279,4 +361,5 @@ def alt_go():
 
 
 go()
+
 
