@@ -77,12 +77,17 @@ def input_matrix(n, show=True):  # num of row
             print('N=', n)
             print('input :')
         a = [[] for _ in range(n)]
-        for i in range(n):
-            line = input()
-            if show:
-                config.store.append(line)
-            int_line = [int(x) for x in line.split()]
-            a[i] = int_line
+
+        try:
+            for i in range(n):
+                line = input()
+                if show:
+                    config.store.append(line)
+                int_line = [int(x) for x in line.split()]
+                a[i] = int_line
+        except ValueError:
+            print("elements should be integers, try again:")
+            continue
 
         try:
             for i in range(n - 1):
@@ -93,9 +98,6 @@ def input_matrix(n, show=True):  # num of row
             continue
         else:
             break
-
-
-
     return Matrix(a)
 
 
