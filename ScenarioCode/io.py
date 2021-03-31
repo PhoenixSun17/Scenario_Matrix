@@ -84,11 +84,17 @@ def input_matrix(n, show=True):  # num of row
             int_line = [int(x) for x in line.split()]
             a[i] = int_line
 
-        for i in range(n - 1):
-            if len(a[i]) != len(a[i + 1]):
-                print("\nInvalid input. Please try again: ")
-                continue
-        break
+        try:
+            for i in range(n - 1):
+                if len(a[i]) != len(a[i + 1]):
+                    print("\nInvalid input. Please try again: ")
+                    raise ValueError
+        except ValueError:
+            continue
+        else:
+            break
+
+
 
     return Matrix(a)
 
