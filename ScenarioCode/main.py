@@ -156,11 +156,6 @@ def go():
                             print(val, end="\t\t")
                         print("\n")
 
-                    eigenvalues = eigenvalue(mat)
-                    print("Eigenvalues are: ")
-                    for val in eigenvalues:
-                        print(val, end="\t")
-
                 elif key_eig == "Invalid, please retry":
                     print(menu_eig())
         elif key == "exit":
