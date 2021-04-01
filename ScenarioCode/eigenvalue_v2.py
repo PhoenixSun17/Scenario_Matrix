@@ -45,7 +45,6 @@ def eigenvalue(A, eps=1e-6):
     flag = 1
     n = 0
     while flag:
-        print("in flag")
         Ak0 = Ak.copy()
         Qk, Rk = QR_decomposion(Ak)
         Ak = Rk * Qk
